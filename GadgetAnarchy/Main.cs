@@ -1,9 +1,10 @@
 using System;
 using System.Reflection;
-using DV.Customization.Gadgets;
+
 using HarmonyLib;
-using UnityEngine;
 using UnityModManagerNet;
+
+using UnityEngine;
 
 namespace GadgetAnarchy
 {
@@ -63,36 +64,6 @@ namespace GadgetAnarchy
 		{
 			if (settings.isLoggingEnabled)
 				mod?.Logger.Log(message);
-		}
-	}
-
-	[HarmonyPatch(typeof(GadgetItem), nameof(GadgetItem.CanPlace))]
-	static class GadgetItemCanPlacePatch
-	{
-		static bool Prefix(ref bool __result)
-		{
-			__result = true;
-			return false;
-		}
-	}
-
-	[HarmonyPatch(typeof(GadgetMount), nameof(GadgetMount.CheckIfCanChangeToState))]
-	static class GadgetMountCheckIfCanChangeToStatePatch
-	{
-		static bool Prefix(ref bool __result)
-		{
-			__result = true;
-			return false;
-		}
-	}
-
-	[HarmonyPatch(typeof(MountPoint), nameof(MountPoint.IsOnGlass), MethodType.Getter)]
-	static class MountPointIsOnGlassPatch
-	{
-		static bool Prefix(ref bool __result)
-		{
-			__result = false;
-			return false;
 		}
 	}
 }
