@@ -80,17 +80,17 @@ namespace GadgetAnarchy
 			}
 		}
 
-		[HarmonyPatch(typeof(GadgetMount), nameof(GadgetMount.CheckIfCanChangeToState))]
+		[HarmonyPatch(typeof(Drillable), nameof(Drillable.CheckIfCanChangeToState))]
 		static class GadgetMountCheckIfCanChangeToStatePatch
 		{
-			static bool Prefix(int index, MountPoint.States desiredState, ref bool __result, GadgetMount __instance)
+			static bool Prefix(int index, MountPoint.States desiredState, ref bool __result, Drillable __instance)
 			{
 				if (!Main.settings.drillAnarchy)
 				{
 					return true;
 				}
 
-				var mountPointsField = typeof(GadgetMount).GetField("mountPoints", BindingFlags.NonPublic | BindingFlags.Instance);
+				var mountPointsField = typeof(Drillable).GetField("mountPoints", BindingFlags.NonPublic | BindingFlags.Instance);
 				if (mountPointsField == null)
 				{
 					return true;
